@@ -1,4 +1,5 @@
-import { students } from './script.js';
+// import { students } from './data.js';
+import { students, deleteStudent } from './script.js';
 
 const searchInput = document.querySelector('.search-input');
 const searchBtn = document.getElementById('search-btn');
@@ -49,7 +50,7 @@ export function renderSearch() {
         const deleteBtn = document.querySelector(`.delete-${student.rollNo}`);
         deleteBtn.addEventListener('click', (e) => {
           e.preventDefault();
-          deleteStudent(student.rollNo);
+          deleteFilteredStudent(student.rollNo);
           renderFilteredStudents();
         });
 
@@ -62,10 +63,12 @@ export function renderSearch() {
       });
     }
 
-    function deleteStudent(rollNo) {
+    function deleteFilteredStudent(rollNo) {
       filteredStudents = filteredStudents.filter(
         (student) => student.rollNo !== rollNo
       );
+
+      deleteStudent(rollNo);
     }
 
     function getEditData(rollNum) {
